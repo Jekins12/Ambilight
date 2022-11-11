@@ -30,10 +30,10 @@ namespace Ambilight
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.Connect = new System.Windows.Forms.Button();
             this.Disconnect = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -65,14 +65,6 @@ namespace Ambilight
             this.Disconnect.UseVisualStyleBackColor = true;
             this.Disconnect.Click += new System.EventHandler(this.Disconnect_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(59, 39);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(210, 236);
-            this.textBox1.TabIndex = 3;
-            // 
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
@@ -81,15 +73,15 @@ namespace Ambilight
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 299);
-            this.Controls.Add(this.textBox1);
+            this.ClientSize = new System.Drawing.Size(310, 49);
             this.Controls.Add(this.Disconnect);
             this.Controls.Add(this.Connect);
             this.Controls.Add(this.comboBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -98,7 +90,6 @@ namespace Ambilight
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button Connect;
         private System.Windows.Forms.Button Disconnect;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Timer timer1;
     }
 }

@@ -51,17 +51,20 @@ namespace Ambilight
 
         
 
-
-
         public int[] getFrame(int frame_num)
         {
 
             int[] frame = new int[3];
 
-            if (frame_num == 1)
+            if (frame_num == 1)                                             // Taking scrennshot every first "frame"
             {
                 Graphics graphics = Graphics.FromImage(bitmap as Image); // Create a new graphics objects that can capture the screen
-                graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size); // Screenshot moment → screen content to graphics object
+                try
+                {
+                    graphics.CopyFromScreen(0, 0, 0, 0, bitmap.Size); // Screenshot moment → screen content to graphics object
+                }
+                catch (Exception) { }
+                
             }
 
 
@@ -106,11 +109,15 @@ namespace Ambilight
                     }
                 }
             }
-
+            
             frame[0] = sumR / ((bitmap.Width / (NUM_LEDS / 2)) / 16 * ((bitmap.Height / 6)) / 18);
             frame[1] = sumG / ((bitmap.Width / (NUM_LEDS / 2)) / 16 * ((bitmap.Height / 6)) / 18);
             frame[2] = sumB / ((bitmap.Width / (NUM_LEDS / 2)) / 16 * ((bitmap.Height / 6)) / 18);
-
+            /*
+            frame[0] = sumR / ((bitmap.Width / (NUM_LEDS / 2)) / 4 * ((bitmap.Height / 6)) / 6);
+            frame[1] = sumG / ((bitmap.Width / (NUM_LEDS / 2)) / 4 * ((bitmap.Height / 6)) / 6);
+            frame[2] = sumB / ((bitmap.Width / (NUM_LEDS / 2)) / 4 * ((bitmap.Height / 6)) / 6);
+            */
 
             return frame;
 
@@ -167,7 +174,6 @@ namespace Ambilight
 
             try
             {
-                textBox1.Text = string.Join(" ", screen);
                 port.Write(string.Join(" ", screen) + "A");
             }
 
@@ -197,6 +203,15 @@ namespace Ambilight
         {
            
                 setAmbient();
+            
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (port.IsOpen == true)
+            {
+                Disconnect_Click(null, null);
+            }
             
         }
     }
